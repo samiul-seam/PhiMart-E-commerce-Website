@@ -20,8 +20,6 @@ class ProductViewSet(ModelViewSet):
     - Support searching by name , category, description
     - Support oreding by price and date
     """
-
-    queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = ProductFilter
@@ -30,7 +28,9 @@ class ProductViewSet(ModelViewSet):
     ordering_fields = ['price', 'updated_at']
     permission_classes = [InsAdminOrReadOnly]
 
-
+    def get_queryset(self):
+        return Product.objects.prefetch_related('images').all()
+    
     @swagger_auto_schema(
         operation_summary= "Retrive a list of products",
     )
