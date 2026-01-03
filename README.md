@@ -71,7 +71,7 @@ Authorization: Bearer <access_token>
 
 Swagger UI is available for interactive API testing and exploration.
 
-- **Swagger UI:**  http://127.0.0.1:8000/swaager/
+- **Swagger UI:**  http://127.0.0.1:8000/swagger/
 
 
 - **ReDoc UI:**  http://127.0.0.1:8000/redoc/
