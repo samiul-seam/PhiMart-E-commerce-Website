@@ -63,7 +63,6 @@ class ProductImageViewSet(ModelViewSet):
         serializer.save(product_id=self.kwargs.get('product_pk'))
 
 
-
 class CategoryViewSet(ModelViewSet):
     permission_classes = [InsAdminOrReadOnly]
     queryset = Category.objects.annotate(

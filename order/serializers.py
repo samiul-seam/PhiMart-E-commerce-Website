@@ -24,7 +24,7 @@ class AddCartItemSerializer(serializers.ModelSerializer):
         cart_id = self.context['cart_id']
         product_id = self.validated_data['product_id']
         quantity = self.validated_data['quantity']
- 
+
         try:
             cart_item = CartItem.objects.get(cart_id=cart_id, product_id=product_id)
             cart_item.quantity += quantity

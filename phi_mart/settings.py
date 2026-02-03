@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v6fbh0f_d+q@yxat#7haj^w^k6t+kf8n3zy78ep=b2=x6b#xtp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [".vercel.app", "127.0.0.1"]
 AUTH_USER_MODEL = 'users.User'
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'django_filters',
+    "corsheaders",
     'rest_framework',
     'djoser',
     'users',
@@ -41,7 +42,9 @@ INSTALLED_APPS = [
     "debug_toolbar"
 ]
 
+
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -71,6 +74,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'phi_mart.wsgi.app'
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 
 
 # Database
@@ -170,7 +178,7 @@ REST_FRAMEWORK = {
     # ]
 }
 
- 
+
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
    "ACCESS_TOKEN_LIFETIME": timedelta(days=15),
@@ -194,4 +202,4 @@ SWAGGER_SETTINGS = {
             'description': 'Enter Your JWT token in the format: `JWT <your token>`'
       }
    }
-}
+} 

@@ -15,7 +15,6 @@ class CartViewSet(CreateModelMixin, GenericViewSet, RetrieveModelMixin, DestroyM
     serializer_class = CartSerializer
     permission_classes = [IsAuthenticated]
 
-
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
@@ -24,9 +23,10 @@ class CartViewSet(CreateModelMixin, GenericViewSet, RetrieveModelMixin, DestroyM
             return Cart.objects.none()
         return Cart.objects.prefetch_related('items__product').filter(user=self.request.user)
 
+
 class CartItemViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch', 'delete']
-
+ 
     def get_serializer_class(self):
         if self.request.method =='POST':
             return AddCartItemSerializer
@@ -36,9 +36,11 @@ class CartItemViewSet(ModelViewSet):
     
     def get_serializer_context(self):
         return {'cart_id': self.kwargs.get('cart_pk')}
-        
+    
     def get_queryset(self):
         return CartItem.objects.select_related('product').filter(cart_id=self.kwargs.get('cart_pk'))
+
+
 
 class OrderViewset(ModelViewSet):
     http_method_names = ['get', 'post', 'delete', 'patch', 'head', 'option']
