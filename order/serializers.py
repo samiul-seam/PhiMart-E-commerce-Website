@@ -87,7 +87,7 @@ class CreateOrderSerializer(serializers.Serializer):
         cart_id = validated_data['cart_id']
 
         try:
-            order = OrderService.create_order(user=user_id, cart_id=cart_id)
+            order = OrderService.create_order(user_id=user_id, cart_id=cart_id)
             return order
         except ValueError as e:
             raise serializers.ValidationError(str(e)) 
